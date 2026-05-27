@@ -120,6 +120,4 @@ Tested targets: Chrome, Firefox, Safari (iOS 11+), Edge.
 └── README.md     # This file
 ```
 
-## License
 
-MIT — use freely for personal or commercial projects.
