@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A cute doodle-style photobooth — snap up to 4 selfies and download your strip!">
+  <title>✨ Doodle Photobooth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=8">
+</head>
+<body>
+  <!-- Decorative doodles scattered around the page -->
+  <div class="doodles" aria-hidden="true">
+    <span class="doodle doodle-star doodle-1">★</span>
+    <span class="doodle doodle-heart doodle-2">♥</span>
+    <span class="doodle doodle-smiley doodle-3">☺</span>
+    <span class="doodle doodle-star doodle-4">★</span>
+    <span class="doodle doodle-arrow doodle-5">→</span>
+    <span class="doodle doodle-heart doodle-6">♥</span>
+    <span class="doodle doodle-scribble doodle-7">~~~</span>
+    <span class="doodle doodle-star doodle-8">★</span>
+    <span class="doodle doodle-sparkle doodle-9">✦</span>
+    <span class="doodle doodle-sparkle doodle-10">✧</span>
+    <span class="doodle doodle-swirl doodle-11">〜</span>
+    <span class="doodle doodle-heart doodle-12">♥</span>
+    <span class="doodle doodle-arrow doodle-13">↑</span>
+    <span class="doodle doodle-smiley doodle-14">:)</span>
+    <span class="doodle doodle-star doodle-15">★</span>
+    <span class="doodle doodle-note doodle-16">♪</span>
+    <span class="doodle doodle-circle doodle-17">○</span>
+    <span class="doodle doodle-scribble doodle-18">~ ~</span>
+    <span class="doodle doodle-sparkle doodle-19">✦</span>
+    <span class="doodle doodle-arrow doodle-20">↗</span>
+    <span class="doodle doodle-heart doodle-21">♥</span>
+    <span class="doodle doodle-star doodle-22">★</span>
+    <span class="doodle doodle-swirl doodle-23">〜</span>
+    <span class="doodle doodle-smiley doodle-24">☺</span>
+
+    <!-- Hand-drawn SVG squiggles -->
+    <svg class="doodle-svg doodle-svg-1" viewBox="0 0 80 40" fill="none" aria-hidden="true">
+      <path d="M4 28 Q20 8, 36 24 T68 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="doodle-svg doodle-svg-2" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+      <path d="M10 45 L25 15 L40 40 L55 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg class="doodle-svg doodle-svg-3" viewBox="0 0 50 50" fill="none" aria-hidden="true">
+      <circle cx="25" cy="25" r="18" stroke="currentColor" stroke-width="2.5" stroke-dasharray="4 6"/>
+    </svg>
+    <svg class="doodle-svg doodle-svg-4" viewBox="0 0 90 30" fill="none" aria-hidden="true">
+      <path d="M5 15 Q22 2, 40 15 T75 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="doodle-svg doodle-svg-5" viewBox="0 0 40 70" fill="none" aria-hidden="true">
+      <path d="M20 5 Q35 25, 15 40 Q5 55, 25 65" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <svg class="doodle-svg doodle-svg-6" viewBox="0 0 70 70" fill="none" aria-hidden="true">
+      <path d="M12 55 L35 12 L58 48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+      <path d="M8 35 Q35 30, 62 38" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="app">
+    <header class="header">
+      <span class="header-doodle header-doodle-left" aria-hidden="true">✦ ★ ✦</span>
+      <h1 class="title">Doodle Photobooth</h1>
+      <p class="subtitle">Snap 4 silly selfies · download your strip!</p>
+      <p class="subtitle">Imagine I am with you!</p>
+      <span class="header-doodle header-doodle-right" aria-hidden="true">♥ 〜 ♥</span>
+    </header>
+
+    <main class="main">
+      <!-- Camera preview -->
+      <section class="panel panel-camera" aria-label="Camera preview">
+        <div class="panel-doodles" aria-hidden="true">
+          <span class="panel-doodle panel-doodle-tl">★</span>
+          <span class="panel-doodle panel-doodle-tr">→</span>
+          <span class="panel-doodle panel-doodle-bl">♥</span>
+          <span class="panel-doodle panel-doodle-br">✦</span>
+        </div>
+        <h2 class="panel-title">Say cheese! 📸</h2>
+
+        <div class="camera-wrap">
+          <div id="camera-frame" class="camera-frame theme-natural">
+            <!-- Video is the camera source only — preview is drawn to canvas for WYSIWYG -->
+            <video id="video" autoplay playsinline muted hidden aria-hidden="true"></video>
+            <canvas id="preview-canvas" aria-label="Live camera preview"></canvas>
+            <div id="preview-vignette" class="preview-vignette" aria-hidden="true"></div>
+            <canvas id="capture-canvas" hidden aria-hidden="true"></canvas>
+            <div id="countdown" class="countdown" hidden aria-live="polite"></div>
+            <div id="camera-placeholder" class="camera-placeholder">
+              <p>Camera loading…</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Digicam theme picker -->
+        <fieldset id="theme-picker" class="theme-picker">
+          <legend class="theme-picker-label">Digicam vibe</legend>
+          <div id="theme-options" class="theme-options" role="radiogroup" aria-label="Photo filter theme">
+            <!-- Populated by script.js -->
+          </div>
+          <p class="theme-picker-hint">Pick before your first snap · clears on retake</p>
+        </fieldset>
+
+        <p id="camera-error" class="camera-error" role="alert" hidden></p>
+        <p id="photo-count" class="photo-count">Photo 1 of 4</p>
+      </section>
+
+      <!-- Photostrip preview -->
+      <section class="panel panel-strip" aria-label="Photo strip">
+        <div class="panel-doodles" aria-hidden="true">
+          <span class="panel-doodle panel-doodle-tl">✂</span>
+          <span class="panel-doodle panel-doodle-tr">★</span>
+          <span class="panel-doodle panel-doodle-bl">〜</span>
+          <span class="panel-doodle panel-doodle-br">♥</span>
+        </div>
+        <h2 class="panel-title">Your strip ✂️</h2>
+
+        <div class="strip-wrap">
+          <div id="strip" class="strip">
+            <div class="strip-message">
+              <p class="strip-message-main">Eid Mubarak</p>
+              <p class="strip-message-sub">to my lovely wife</p>
+            </div>
+            <div class="strip-slots">
+              <div class="strip-slot" data-slot="0"><span class="slot-label">1</span></div>
+              <div class="strip-slot" data-slot="1"><span class="slot-label">2</span></div>
+              <div class="strip-slot" data-slot="2"><span class="slot-label">3</span></div>
+              <div class="strip-slot" data-slot="3"><span class="slot-label">4</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Controls -->
+    <nav class="controls" aria-label="Photobooth controls">
+      <button id="btn-capture" class="btn btn-primary" type="button">
+        <span class="btn-icon">📷</span> Snap!
+      </button>
+      <button id="btn-clear" class="btn btn-secondary" type="button" disabled>
+        <span class="btn-icon">↺</span> Clear / Retake
+      </button>
+      <button id="btn-download" class="btn btn-accent" type="button" disabled>
+        <span class="btn-icon">↓</span> Download Strip
+      </button>
+    </nav>
+
+    <footer class="footer">
+      <p>Made with ♥ — for my lovely wife</p>
+    </footer>
+  </div>
+
+  <!-- Hidden canvas used to build the downloadable strip -->
+  <canvas id="strip-canvas" hidden aria-hidden="true"></canvas>
+
+  <script src="script.js?v=8"></script>
+</body>
+</html>

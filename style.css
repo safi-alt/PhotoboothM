@@ -1,0 +1,745 @@
+/* ==========================================================================
+   Doodle Photobooth — Sketchbook Theme
+   Customize colors in :root below.
+   ========================================================================== */
+
+:root {
+  /* Paper & ink */
+  --cream: #fff8e7;
+  --cream-dark: #f5e6c8;
+  --ink: #1a1a1a;
+  --ink-light: #3d3d3d;
+
+  /* Accent palette */
+  --pink: #ff6b9d;
+  --pink-light: #ffb3cc;
+  --yellow: #ffd93d;
+  --yellow-light: #fff0a0;
+  --blue: #6bb5ff;
+  --blue-light: #b3d9ff;
+
+  /* Layout */
+  --radius-wobbly: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --radius-wobbly-alt: 15px 255px 15px 225px / 225px 15px 255px 15px;
+  --shadow-sketch: 3px 3px 0 var(--ink);
+  --font-display: "Caveat", cursive;
+  --font-body: "Patrick Hand", cursive;
+}
+
+/* Reset & base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--ink);
+  background-color: var(--cream);
+  /* Subtle notebook paper texture */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 27px,
+      rgba(107, 181, 255, 0.07) 27px,
+      rgba(107, 181, 255, 0.07) 28px
+    ),
+    radial-gradient(circle at 20% 30%, rgba(255, 107, 157, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(107, 181, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 217, 61, 0.04) 0%, transparent 60%);
+  overflow-x: hidden;
+}
+
+/* ---- Decorative doodles ---- */
+.doodles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.doodle {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0.38;
+  animation: float 6s ease-in-out infinite;
+  user-select: none;
+}
+
+.doodle-star    { color: var(--yellow); }
+.doodle-heart   { color: var(--pink); }
+.doodle-smiley  { color: var(--blue); font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; }
+.doodle-arrow   { color: var(--ink); font-size: 1.75rem; }
+.doodle-scribble {
+  color: var(--pink);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.15em;
+}
+.doodle-sparkle { color: var(--yellow); font-size: 1.35rem; }
+.doodle-swirl   { color: var(--blue); font-size: 2rem; font-weight: bold; }
+.doodle-note    { color: var(--pink); font-size: 1.6rem; }
+.doodle-circle  { color: var(--ink); font-size: 1.8rem; opacity: 0.25; }
+
+/* Background doodle positions */
+.doodle-1  { top: 4%;   left: 6%;   animation-delay: 0s;   font-size: 1.3rem; }
+.doodle-2  { top: 10%;  right: 8%;   animation-delay: 1s;   animation-name: wiggle; }
+.doodle-3  { top: 38%;  left: 2%;   animation-delay: 2s;   }
+.doodle-4  { bottom: 32%; right: 4%; animation-delay: 0.5s; font-size: 1.8rem; }
+.doodle-5  { bottom: 14%; left: 10%; animation-delay: 1.5s; transform: rotate(-20deg); }
+.doodle-6  { top: 22%;  right: 18%; animation-delay: 2.5s; font-size: 1.2rem; }
+.doodle-7  { bottom: 6%;  right: 22%; animation-delay: 3s;   }
+.doodle-8  { top: 58%;  left: 12%; animation-delay: 1.2s;   }
+.doodle-9  { top: 3%;   right: 28%; animation-delay: 0.8s;   animation-name: wiggle; }
+.doodle-10 { top: 18%;  left: 22%; animation-delay: 2.2s;   font-size: 1.1rem; }
+.doodle-11 { top: 50%;  right: 2%;  animation-delay: 1.8s;   animation-duration: 8s; }
+.doodle-12 { bottom: 42%; left: 4%; animation-delay: 3.5s; font-size: 1.7rem; }
+.doodle-13 { top: 8%;   left: 42%; animation-delay: 0.3s;   transform: rotate(10deg); }
+.doodle-14 { bottom: 22%; right: 12%; animation-delay: 2.8s; font-size: 1.25rem; }
+.doodle-15 { top: 72%;  right: 30%; animation-delay: 1.6s;   }
+.doodle-16 { top: 32%;  left: 8%;  animation-delay: 4s;     animation-name: wiggle; }
+.doodle-17 { bottom: 48%; right: 8%; animation-delay: 0.6s; font-size: 2.2rem; }
+.doodle-18 { top: 85%;  left: 28%; animation-delay: 2.4s;   }
+.doodle-19 { top: 46%;  left: 1%;  animation-delay: 3.2s;   font-size: 1rem; }
+.doodle-20 { bottom: 8%;  left: 38%; animation-delay: 1.1s;  transform: rotate(25deg); }
+.doodle-21 { top: 66%;  right: 6%; animation-delay: 4.2s;   font-size: 1.15rem; }
+.doodle-22 { top: 14%;  right: 4%;  animation-delay: 0.4s;   font-size: 1.9rem; opacity: 0.28; }
+.doodle-23 { bottom: 58%; left: 20%; animation-delay: 2.6s; animation-duration: 7s; }
+.doodle-24 { bottom: 2%;  left: 2%;  animation-delay: 3.8s;   }
+
+/* SVG squiggle doodles */
+.doodle-svg {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.32;
+  animation: float 8s ease-in-out infinite;
+}
+
+.doodle-svg-1 { top: 28%;  right: 14%; width: 70px; color: var(--pink);   animation-delay: 1s;   transform: rotate(-8deg); }
+.doodle-svg-2 { bottom: 36%; left: 6%;  width: 50px; color: var(--yellow); animation-delay: 2.5s; transform: rotate(12deg); }
+.doodle-svg-3 { top: 52%;  left: 18%; width: 44px; color: var(--blue);   animation-delay: 0.5s; transform: rotate(-15deg); }
+.doodle-svg-4 { bottom: 18%; right: 32%; width: 80px; color: var(--ink); animation-delay: 3s;   transform: rotate(5deg); opacity: 0.22; }
+.doodle-svg-5 { top: 78%;  right: 18%; width: 36px; color: var(--pink);  animation-delay: 1.8s; transform: rotate(20deg); }
+.doodle-svg-6 { top: 6%;   left: 30%;  width: 55px; color: var(--blue);  animation-delay: 2s;   animation-name: wiggle; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-8px) rotate(5deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  33%       { transform: translateY(-6px) rotate(4deg); }
+  66%       { transform: translateY(-3px) rotate(-5deg); }
+}
+
+/* ---- App shell ---- */
+.app {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.header-doodle {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.35em;
+  opacity: 0.4;
+  margin: 0.25rem 0;
+}
+
+.header-doodle-left  { color: var(--yellow); transform: rotate(-2deg); }
+.header-doodle-right { color: var(--pink); transform: rotate(1deg); }
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 3.75rem);
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  line-height: 1.1;
+  /* Slightly tilted for sketch feel */
+  transform: rotate(-1deg);
+  text-shadow: 2px 2px 0 var(--pink-light);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--ink-light);
+  transform: rotate(0.5deg);
+}
+
+/* ---- Main layout ---- */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Panels ---- */
+.panel {
+  position: relative;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius-wobbly);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sketch);
+  overflow: visible;
+}
+
+/* Corner doodles on panels */
+.panel-doodles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.panel-doodle {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  opacity: 0.45;
+  animation: wiggle 5s ease-in-out infinite;
+}
+
+.panel-doodle-tl { top: -0.6rem;  left: 0.75rem;  color: var(--yellow); animation-delay: 0s; }
+.panel-doodle-tr { top: -0.5rem;  right: 0.75rem; color: var(--ink);    animation-delay: 1s; transform: rotate(15deg); }
+.panel-doodle-bl { bottom: -0.6rem; left: 0.75rem;  color: var(--pink);  animation-delay: 2s; }
+.panel-doodle-br { bottom: -0.5rem; right: 0.75rem; color: var(--blue);  animation-delay: 0.5s; }
+
+.panel-camera::after,
+.panel-strip::after {
+  content: "~ ~ ~";
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--pink);
+  opacity: 0.3;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+}
+
+.panel-camera::after {
+  bottom: 0.4rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+}
+
+.panel-strip::after {
+  top: 0.45rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg);
+  color: var(--blue);
+}
+
+.panel-strip {
+  border-radius: var(--radius-wobbly-alt);
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+/* ---- Camera ---- */
+.camera-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.camera-frame {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 3 / 4;
+  border: 3px dashed var(--ink);
+  border-radius: 12px 28px 18px 32px / 28px 12px 32px 18px;
+  overflow: hidden;
+  background: var(--cream-dark);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+#video {
+  display: none;
+}
+
+#preview-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.25s ease;
+}
+
+/* Live preview approximations of each digicam theme */
+#preview-canvas.filter-natural { filter: none; }
+#preview-canvas.filter-flash   { filter: contrast(1.3) brightness(1.1) saturate(1.2) hue-rotate(8deg); }
+#preview-canvas.filter-golden  { filter: sepia(0.35) saturate(1.3) brightness(1.05) hue-rotate(-8deg); }
+#preview-canvas.filter-cool    { filter: saturate(1.15) hue-rotate(185deg) brightness(1.02) contrast(1.08); }
+#preview-canvas.filter-mono    { filter: grayscale(1) contrast(1.25) brightness(1.05); }
+#preview-canvas.filter-dreamy  { filter: saturate(0.85) brightness(1.08) contrast(0.92) blur(0.3px); }
+
+/* Vignette overlay for preview (strength set per theme via JS) */
+.preview-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 35%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+.preview-vignette.active {
+  opacity: 1;
+}
+
+.camera-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream-dark);
+  color: var(--ink-light);
+  text-align: center;
+  padding: 1rem;
+}
+
+.camera-placeholder p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.camera-placeholder.hidden {
+  display: none;
+}
+
+/* Countdown overlay */
+.countdown {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 248, 231, 0.75);
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--pink);
+  text-shadow: 3px 3px 0 var(--ink);
+  animation: pulse 0.8s ease-in-out;
+  z-index: 2;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(0.5); opacity: 0; }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.camera-error {
+  margin: 0.75rem 0 0;
+  padding: 0.75rem 1rem;
+  background: var(--pink-light);
+  border: 2px solid var(--pink);
+  border-radius: 8px 20px 12px 18px / 18px 8px 20px 12px;
+  color: var(--ink);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.photo-count {
+  text-align: center;
+  margin: 0.75rem 0 0;
+  font-size: 1.1rem;
+  color: var(--blue);
+  font-weight: bold;
+}
+
+/* ---- Theme picker ---- */
+.theme-picker {
+  margin: 1rem 0 0;
+  padding: 0.75rem 0.5rem 0.5rem;
+  border: 2px dashed var(--ink);
+  border-radius: 12px 22px 14px 20px / 20px 14px 22px 12px;
+  min-inline-size: 0;
+}
+
+.theme-picker-label {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding: 0 0.5rem;
+  color: var(--ink);
+}
+
+.theme-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.35rem;
+}
+
+.theme-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.theme-option input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.45rem 0.65rem;
+  min-width: 4.5rem;
+  border: 2px solid var(--ink);
+  border-radius: 10px 18px 12px 16px / 16px 12px 18px 10px;
+  background: var(--cream);
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  user-select: none;
+}
+
+.theme-chip-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.theme-chip-name {
+  font-size: 0.78rem;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Per-theme chip accent colors */
+.theme-option[data-theme="natural"] .theme-chip { background: #fff; }
+.theme-option[data-theme="flash"]   .theme-chip { background: #c8ffd4; }
+.theme-option[data-theme="golden"]  .theme-chip { background: #ffe4b5; }
+.theme-option[data-theme="cool"]    .theme-chip { background: var(--blue-light); }
+.theme-option[data-theme="mono"]    .theme-chip { background: #e8e8e8; }
+.theme-option[data-theme="dreamy"]  .theme-chip { background: var(--pink-light); }
+
+.theme-option input:checked + .theme-chip {
+  transform: rotate(-2deg) scale(1.06);
+  box-shadow: 3px 3px 0 var(--ink);
+  outline: 3px solid var(--pink);
+  outline-offset: 1px;
+}
+
+.theme-option input:focus-visible + .theme-chip {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.theme-option:not(.disabled):hover .theme-chip {
+  transform: rotate(1deg) translateY(-2px);
+}
+
+.theme-picker.disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.theme-picker-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--ink-light);
+}
+
+/* ---- Photostrip ---- */
+.strip-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.strip {
+  width: 100%;
+  max-width: 200px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  padding: 0.5rem;
+  box-shadow: var(--shadow-sketch);
+  transform: rotate(1deg);
+}
+
+.strip-message {
+  text-align: center;
+  padding: 0.35rem 0.25rem 0.55rem;
+  margin-bottom: 0.35rem;
+  border-bottom: 2px dashed rgba(26, 26, 26, 0.15);
+}
+
+.strip-message-main {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--pink);
+  margin: 0;
+  line-height: 1.1;
+  transform: rotate(-1deg);
+}
+
+.strip-message-main::before,
+.strip-message-main::after {
+  content: "♥";
+  font-size: 0.75rem;
+  color: var(--yellow);
+  margin: 0 0.25rem;
+}
+
+.strip-message-sub {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0.2rem 0 0;
+  line-height: 1.2;
+  transform: rotate(0.5deg);
+}
+
+.strip-slots {
+  display: flex;
+  flex-direction: column;
+}
+
+.strip-slot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  margin-bottom: 0.4rem;
+  border: 2px solid var(--ink);
+  border-radius: 4px 10px 6px 8px / 8px 4px 10px 6px;
+  overflow: hidden;
+  background: var(--cream-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.strip-slot:last-child {
+  margin-bottom: 0;
+}
+
+.strip-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slot-label {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: rgba(26, 26, 26, 0.2);
+  user-select: none;
+}
+
+.strip-slot.filled .slot-label {
+  display: none;
+}
+
+/* Highlight next empty slot */
+.strip-slot.next-slot {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 2px var(--yellow-light);
+}
+
+/* ---- Buttons ---- */
+.controls {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1.75rem;
+}
+
+.controls::before,
+.controls::after {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  opacity: 0.35;
+  pointer-events: none;
+  animation: float 7s ease-in-out infinite;
+}
+
+.controls::before {
+  content: "→";
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%) rotate(-20deg);
+  color: var(--yellow);
+}
+
+.controls::after {
+  content: "★";
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pink);
+  animation-delay: 1.5s;
+}
+
+@media (max-width: 700px) {
+  .controls::before,
+  .controls::after {
+    display: none;
+  }
+
+  .doodle-13, .doodle-18, .doodle-20,
+  .doodle-svg-4, .doodle-svg-6 {
+    display: none;
+  }
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  padding: 0.65rem 1.4rem;
+  border: 3px solid var(--ink);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sketch);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-sketch);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.btn-primary {
+  background: var(--pink);
+  color: var(--ink);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: var(--pink-light);
+  transform: rotate(-2deg) scale(1.05);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btn-secondary {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.btn-secondary:not(:disabled):hover {
+  background: var(--yellow-light);
+  transform: rotate(2deg) scale(1.05);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btn-accent {
+  background: var(--blue);
+  color: var(--ink);
+}
+
+.btn-accent:not(:disabled):hover {
+  background: var(--blue-light);
+  transform: rotate(-1deg) scale(1.05);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* ---- Footer ---- */
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: var(--ink-light);
+  transform: rotate(-0.5deg);
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* Flash effect on capture */
+.camera-frame.flash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  animation: flash 0.3s ease-out;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Extra harsh flash burst for the Flash digicam theme */
+.camera-frame.flash-burst::after {
+  animation: flash-burst 0.45s ease-out;
+}
+
+@keyframes flash {
+  0%   { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+@keyframes flash-burst {
+  0%   { opacity: 1; }
+  40%  { opacity: 0.85; }
+  100% { opacity: 0; }
+}
